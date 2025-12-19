@@ -49,13 +49,13 @@ export const ContactTableHeader = ({
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-4">
-        <div className="relative w-full sm:w-96">
+        <div className="relative w-full sm:w-80">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4 pointer-events-none" />
           <Input 
             placeholder="Search contacts..." 
             value={searchTerm} 
             onChange={(e) => setSearchTerm(e.target.value)} 
-            className="pl-9 w-full h-10" 
+            className="pl-9 w-full" 
           />
         </div>
       </div>
