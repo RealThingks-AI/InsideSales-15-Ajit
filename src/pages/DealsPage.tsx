@@ -310,12 +310,12 @@ const DealsPage = () => {
               <h1 className="text-2xl text-foreground font-semibold">Deals</h1>
             </div>
             <div className="flex items-center gap-3">
-              <div className="bg-muted rounded-md p-0.5 flex gap-0.5">
-                <Button variant={activeView === 'kanban' ? 'secondary' : 'ghost'} size="sm" onClick={() => setActiveView('kanban')} className="gap-1.5 h-8 px-2.5 text-xs">
+              <div className="flex items-center gap-0.5 bg-muted/30 rounded-md p-0.5 border border-border/50">
+                <Button variant={activeView === 'kanban' ? 'secondary' : 'ghost'} size="sm" onClick={() => setActiveView('kanban')} className="gap-1.5 h-8 px-3 text-xs font-medium">
                   <LayoutGrid className="h-3.5 w-3.5" />
                   Kanban
                 </Button>
-                <Button variant={activeView === 'list' ? 'secondary' : 'ghost'} size="sm" onClick={() => setActiveView('list')} className="gap-1.5 h-8 px-2.5 text-xs">
+                <Button variant={activeView === 'list' ? 'secondary' : 'ghost'} size="sm" onClick={() => setActiveView('list')} className="gap-1.5 h-8 px-3 text-xs font-medium">
                   <List className="h-3.5 w-3.5" />
                   List
                 </Button>

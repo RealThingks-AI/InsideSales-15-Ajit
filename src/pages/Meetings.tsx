@@ -277,16 +277,16 @@ const Meetings = () => {
             </div>
             <div className="flex items-center gap-3">
               {/* View Toggle */}
-              <div className="flex items-center gap-0.5 bg-muted rounded-md p-0.5">
-                <Button variant={viewMode === 'table' ? 'secondary' : 'ghost'} size="sm" onClick={() => setViewMode('table')} className="gap-1.5 h-8 px-2.5 text-xs">
+              <div className="flex items-center gap-0.5 bg-muted/30 rounded-md p-0.5 border border-border/50">
+                <Button variant={viewMode === 'table' ? 'secondary' : 'ghost'} size="sm" onClick={() => setViewMode('table')} className="gap-1.5 h-8 px-3 text-xs font-medium">
                   <List className="h-3.5 w-3.5" />
                   List
                 </Button>
-                <Button variant={viewMode === 'calendar' ? 'secondary' : 'ghost'} size="sm" onClick={() => setViewMode('calendar')} className="gap-1.5 h-8 px-2.5 text-xs">
+                <Button variant={viewMode === 'calendar' ? 'secondary' : 'ghost'} size="sm" onClick={() => setViewMode('calendar')} className="gap-1.5 h-8 px-3 text-xs font-medium">
                   <CalendarDays className="h-3.5 w-3.5" />
                   Calendar
                 </Button>
-                <Button variant={viewMode === 'analytics' ? 'secondary' : 'ghost'} size="sm" onClick={() => setViewMode('analytics')} className="gap-1.5 h-8 px-2.5 text-xs">
+                <Button variant={viewMode === 'analytics' ? 'secondary' : 'ghost'} size="sm" onClick={() => setViewMode('analytics')} className="gap-1.5 h-8 px-3 text-xs font-medium">
                   <BarChart3 className="h-3.5 w-3.5" />
                   Analytics
                 </Button>
@@ -311,9 +311,9 @@ const Meetings = () => {
       }} onMeetingUpdated={fetchMeetings} /> : <div className="space-y-4">
             {/* Search and Bulk Actions */}
             <div className="flex items-center gap-4">
-              <div className="relative flex-1 max-w-sm">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input placeholder="Search meetings..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-10" />
+              <div className="relative w-full sm:w-96">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                <Input placeholder="Search meetings..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-9 w-full h-10" />
               </div>
               
               <Select value={statusFilter} onValueChange={setStatusFilter}>
