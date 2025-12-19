@@ -61,11 +61,26 @@ const UserDashboard = () => {
   const widgetOrder: WidgetKey[] = dashboardPrefs?.card_order 
     ? (dashboardPrefs.card_order as WidgetKey[])
     : defaultWidgetKeys;
-  const widgetSizes: WidgetSizeConfig = dashboardPrefs?.layout_view 
-    ? (typeof dashboardPrefs.layout_view === 'string' 
-        ? JSON.parse(dashboardPrefs.layout_view) 
-        : dashboardPrefs.layout_view as WidgetSizeConfig)
-    : {};
+  
+  // Safely parse widget sizes - handle legacy string values gracefully
+  const parseWidgetSizes = (): WidgetSizeConfig => {
+    if (!dashboardPrefs?.layout_view) return {};
+    if (typeof dashboardPrefs.layout_view === 'object') {
+      return dashboardPrefs.layout_view as WidgetSizeConfig;
+    }
+    if (typeof dashboardPrefs.layout_view === 'string') {
+      try {
+        const parsed = JSON.parse(dashboardPrefs.layout_view);
+        if (typeof parsed === 'object' && parsed !== null) {
+          return parsed as WidgetSizeConfig;
+        }
+      } catch {
+        // Legacy string value like "grid" - ignore and use defaults
+      }
+    }
+    return {};
+  };
+  const widgetSizes: WidgetSizeConfig = parseWidgetSizes();
 
   // Save dashboard preferences
   const savePreferencesMutation = useMutation({
