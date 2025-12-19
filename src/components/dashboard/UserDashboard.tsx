@@ -6,26 +6,17 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Users, FileText, Briefcase, TrendingUp, Clock, CheckCircle2, ArrowRight, Plus } from "lucide-react";
+import { useUserDisplayNames } from "@/hooks/useUserDisplayNames";
+import { useMemo } from "react";
 
-const useUserProfile = (userId: string | undefined) => {
-  return useQuery({
-    queryKey: ['user-profile', userId],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('full_name')
-        .eq('id', userId)
-        .maybeSingle();
-      if (error) throw error;
-      return data?.full_name || null;
-    },
-    enabled: !!userId
-  });
-};
 const UserDashboard = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const { data: userName } = useUserProfile(user?.id);
+  
+  // Use the display names hook to get proper user name from auth.users
+  const userIds = useMemo(() => user?.id ? [user.id] : [], [user?.id]);
+  const { displayNames } = useUserDisplayNames(userIds);
+  const userName = user?.id ? displayNames[user.id] : null;
 
   // Fetch user's leads count
   const {
