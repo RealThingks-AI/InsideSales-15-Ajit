@@ -34,12 +34,12 @@ const Dashboard = () => {
         .eq('user_id', user.id)
         .maybeSingle();
       if (error) throw error;
-      return (data?.layout_view as DashboardView) || 'analytics';
+      return (data?.layout_view as DashboardView) || 'overview';
     },
     enabled: !!user?.id && isAdmin,
   });
 
-  const [currentView, setCurrentView] = useState<DashboardView>("analytics");
+  const [currentView, setCurrentView] = useState<DashboardView>("overview");
 
   // Update local state when preference is loaded
   useEffect(() => {
@@ -101,23 +101,23 @@ const Dashboard = () => {
                 type="single" 
                 value={currentView} 
                 onValueChange={handleViewChange}
-                className="bg-muted rounded-lg p-1"
+                className="bg-muted/60 border border-border rounded-lg p-1"
               >
-                <ToggleGroupItem 
-                  value="analytics" 
-                  aria-label="Revenue Analytics"
-                  className="data-[state=on]:bg-background data-[state=on]:shadow-sm px-3 py-1.5 text-sm"
-                >
-                  <BarChart3 className="w-4 h-4 mr-2" />
-                  Revenue Analytics
-                </ToggleGroupItem>
                 <ToggleGroupItem 
                   value="overview" 
                   aria-label="Dashboard Overview"
-                  className="data-[state=on]:bg-background data-[state=on]:shadow-sm px-3 py-1.5 text-sm"
+                  className="px-3 py-1.5 text-sm data-[state=on]:bg-primary data-[state=on]:text-primary-foreground data-[state=on]:shadow-sm data-[state=off]:text-muted-foreground"
                 >
                   <LayoutDashboard className="w-4 h-4 mr-2" />
                   Dashboard
+                </ToggleGroupItem>
+                <ToggleGroupItem 
+                  value="analytics" 
+                  aria-label="Revenue Analytics"
+                  className="px-3 py-1.5 text-sm data-[state=on]:bg-primary data-[state=on]:text-primary-foreground data-[state=on]:shadow-sm data-[state=off]:text-muted-foreground"
+                >
+                  <BarChart3 className="w-4 h-4 mr-2" />
+                  Revenue Analytics
                 </ToggleGroupItem>
               </ToggleGroup>
             </div>
