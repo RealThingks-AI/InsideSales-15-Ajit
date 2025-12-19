@@ -386,22 +386,26 @@ export const AccountModal = ({ open, onOpenChange, account, onSuccess }: Account
                   <Button
                     variant="outline"
                     role="combobox"
-                    className="w-full justify-between h-auto min-h-10"
+                    className="w-full justify-between h-auto min-h-10 py-2"
                   >
-                    <div className="flex flex-wrap gap-1 flex-1">
+                    <div className="flex items-center gap-1 flex-1 min-w-0">
                       {selectedTags.length > 0 ? (
-                        selectedTags.slice(0, 3).map((tag) => (
-                          <Badge key={tag} variant="secondary" className="text-xs">
-                            {tag}
-                          </Badge>
-                        ))
+                        <div className="flex items-center gap-1 flex-1 min-w-0 overflow-hidden">
+                          <div className="flex gap-1 overflow-hidden flex-1">
+                            {selectedTags.map((tag, index) => (
+                              <Badge key={tag} variant="secondary" className="text-xs shrink-0 max-w-[120px] truncate">
+                                {tag}
+                              </Badge>
+                            ))}
+                          </div>
+                          {selectedTags.length > 2 && (
+                            <Badge variant="outline" className="text-xs shrink-0">
+                              +{selectedTags.length - 2} more
+                            </Badge>
+                          )}
+                        </div>
                       ) : (
                         <span className="text-muted-foreground">Select tags...</span>
-                      )}
-                      {selectedTags.length > 3 && (
-                        <Badge variant="secondary" className="text-xs">
-                          +{selectedTags.length - 3} more
-                        </Badge>
                       )}
                     </div>
                     <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
