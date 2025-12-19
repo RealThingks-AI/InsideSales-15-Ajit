@@ -214,6 +214,7 @@ const ContactsTable = ({ contacts, columns }: ContactsTableProps) => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-9"
+            inputSize="control"
           />
         </div>
 

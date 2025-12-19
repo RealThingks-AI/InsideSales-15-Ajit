@@ -249,7 +249,7 @@ export const DealsFilterPanel = ({ filters, onFiltersChange, children }: DealsFi
                 placeholder="Search deal name..."
                 value={localFilters.dealName}
                 onChange={(e) => updateFilter("dealName", e.target.value)}
-                inputSize="sm"
+                inputSize="control"
               />
             </div>
 
@@ -260,7 +260,7 @@ export const DealsFilterPanel = ({ filters, onFiltersChange, children }: DealsFi
                 placeholder="Search project name..."
                 value={localFilters.projectName}
                 onChange={(e) => updateFilter("projectName", e.target.value)}
-                inputSize="sm"
+                inputSize="control"
               />
             </div>
 
@@ -271,7 +271,7 @@ export const DealsFilterPanel = ({ filters, onFiltersChange, children }: DealsFi
                 placeholder="Search lead name..."
                 value={localFilters.leadName}
                 onChange={(e) => updateFilter("leadName", e.target.value)}
-                inputSize="sm"
+                inputSize="control"
               />
             </div>
 
@@ -282,7 +282,7 @@ export const DealsFilterPanel = ({ filters, onFiltersChange, children }: DealsFi
                 placeholder="Search customer name..."
                 value={localFilters.customerName}
                 onChange={(e) => updateFilter("customerName", e.target.value)}
-                inputSize="sm"
+                inputSize="control"
               />
             </div>
           </div>

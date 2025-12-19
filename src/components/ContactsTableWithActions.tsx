@@ -166,7 +166,7 @@ const ContactsTable = ({ columns }: ContactsTableProps) => {
             placeholder="Search contacts..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            inputSize="sm"
+            inputSize="control"
           />
         </div>
         <div className="overflow-x-auto">

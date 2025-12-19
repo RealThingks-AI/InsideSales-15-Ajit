@@ -395,7 +395,7 @@ const UserManagement = () => {
                 
                 <div className="relative w-64">
                   <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-                  <Input placeholder="Search users..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="pl-9" inputSize="sm" />
+                  <Input placeholder="Search users..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="pl-9" inputSize="control" />
                 </div>
               </div>
             </CardHeader>

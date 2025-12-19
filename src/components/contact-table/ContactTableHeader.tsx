@@ -56,7 +56,7 @@ export const ContactTableHeader = ({
             value={searchTerm} 
             onChange={(e) => setSearchTerm(e.target.value)} 
             className="pl-9" 
-            inputSize="sm"
+            inputSize="control"
           />
         </div>
       </div>
