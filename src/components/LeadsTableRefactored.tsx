@@ -166,6 +166,7 @@ const LeadsTableRefactored = ({ columns, leads = sampleLeads }: LeadsTableProps)
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-9"
+              inputSize="control"
             />
           </div>
           <div className="overflow-x-auto">

@@ -313,7 +313,7 @@ const Meetings = () => {
             <div className="flex items-center gap-4">
               <div className="relative w-64">
                 <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input placeholder="Search meetings..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-9" inputSize="sm" />
+                <Input placeholder="Search meetings..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-9" inputSize="control" />
               </div>
               
               <Select value={statusFilter} onValueChange={setStatusFilter}>

@@ -428,7 +428,7 @@ const AuditLogsSettings = () => {
         <CardContent>
           <div className="flex items-center gap-4 mb-4">
             <div className="w-64">
-              <Input placeholder="Search logs..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} inputSize="sm" />
+              <Input placeholder="Search logs..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} inputSize="control" />
             </div>
             <Select value={actionFilter} onValueChange={setActionFilter}>
               <SelectTrigger className="w-48">

@@ -154,7 +154,7 @@ const ContactsTable = ({ columns, contacts, onEditContact, onDeleteContact }: Co
             placeholder="Search contacts..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            inputSize="sm"
+            inputSize="control"
           />
         </div>
 
