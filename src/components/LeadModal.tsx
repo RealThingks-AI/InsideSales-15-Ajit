@@ -325,13 +325,13 @@ export const LeadModal = ({ open, onOpenChange, lead, onSuccess }: LeadModalProp
         </DialogHeader>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
             {/* Duplicate Warning */}
             {!lead && duplicates.length > 0 && (
               <DuplicateWarning duplicates={duplicates} entityType="lead" />
             )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <FormField
                 control={form.control}
                 name="lead_name"
