@@ -9,6 +9,7 @@ import { Plus, Search } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { BulkActionsBar } from "./BulkActionsBar";
 import { DealsAdvancedFilter, AdvancedFilterState } from "./DealsAdvancedFilter";
+import { DeleteConfirmDialog } from "./shared/DeleteConfirmDialog";
 
 interface KanbanBoardProps {
   deals: Deal[];
@@ -33,6 +34,8 @@ export const KanbanBoard = ({
   const [selectedDeals, setSelectedDeals] = useState<Set<string>>(new Set());
   const [selectionMode, setSelectionMode] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [dealToDelete, setDealToDelete] = useState<Deal | null>(null);
   const [filters, setFilters] = useState<AdvancedFilterState>({
     stages: [],
     regions: [],
@@ -146,6 +149,12 @@ export const KanbanBoard = ({
     try {
       console.log(`Moving deal ${draggableId} to stage ${newStage}`);
       
+      // Show immediate visual feedback
+      toast({
+        title: "Moving Deal...",
+        description: `Moving to ${newStage} stage`,
+      });
+      
       // Create update object with the new stage
       const updates: Partial<Deal> = {
         stage: newStage
@@ -154,8 +163,8 @@ export const KanbanBoard = ({
       await onUpdateDeal(draggableId, updates);
       
       toast({
-        title: "Deal Updated",
-        description: `Deal moved to ${newStage} stage`,
+        title: "Deal Moved",
+        description: `Successfully moved to ${newStage} stage`,
       });
     } catch (error) {
       console.error("Error updating deal stage:", error);
@@ -253,7 +262,7 @@ export const KanbanBoard = ({
   return (
     <div className="h-full flex flex-col overflow-hidden">
       {/* Fixed top search and controls bar */}
-      <div className="flex-shrink-0 px-4 py-2 bg-background border-b border-border">
+      <div className="flex-shrink-0 px-4 py-2 bg-background border-b border-transparent">
         <div className="flex flex-col lg:flex-row gap-2 items-start lg:items-center justify-between">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 flex-1 min-w-0">
             <div className="relative w-64">
@@ -282,7 +291,7 @@ export const KanbanBoard = ({
                 variant={selectionMode ? "default" : "outline"}
                 size="sm"
                 onClick={toggleSelectionMode}
-                className="hover-scale transition-all whitespace-nowrap text-sm h-8 px-3"
+                className="hover-scale transition-all whitespace-nowrap h-8 px-3 text-sm"
               >
                 {selectionMode ? "Exit Selection" : "Select Deals"}
               </Button>
@@ -327,7 +336,7 @@ export const KanbanBoard = ({
           }}
         >
           {/* Stage headers - now inside the scrollable container */}
-          <div className="sticky top-0 bg-background border-b border-border/30 z-10 pt-2 pb-2">
+          <div className="sticky top-0 bg-background border-b border-transparent z-10 pt-2 pb-2">
             <div 
               className="grid gap-2"
               style={{ 
@@ -436,11 +445,9 @@ export const KanbanBoard = ({
                                     isSelected={selectedDeals.has(deal.id)}
                                     selectionMode={selectionMode}
                                     onDelete={(dealId) => {
-                                      onDeleteDeals([dealId]);
-                                      toast({
-                                        title: "Deal deleted",
-                                        description: `Successfully deleted ${deal.project_name || 'deal'}`,
-                                      });
+                                      const targetDeal = deals.find(d => d.id === dealId);
+                                      setDealToDelete(targetDeal || null);
+                                      setDeleteDialogOpen(true);
                                     }}
                                     onStageChange={handleDealCardAction}
                                   />
@@ -469,6 +476,25 @@ export const KanbanBoard = ({
           onClearSelection={() => setSelectedDeals(new Set())}
         />
       </div>
+
+      {/* Delete confirmation dialog */}
+      <DeleteConfirmDialog
+        open={deleteDialogOpen}
+        onOpenChange={setDeleteDialogOpen}
+        onConfirm={() => {
+          if (dealToDelete) {
+            onDeleteDeals([dealToDelete.id]);
+            toast({
+              title: "Deal deleted",
+              description: `Successfully deleted ${dealToDelete.project_name || 'deal'}`,
+            });
+            setDealToDelete(null);
+          }
+        }}
+        title="Delete Deal"
+        itemName={dealToDelete?.project_name || 'this deal'}
+        itemType="deal"
+      />
     </div>
   );
 };
